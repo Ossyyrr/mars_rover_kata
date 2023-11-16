@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:mars_rover_kata/mars.dart';
 import 'package:mars_rover_kata/mars_rover.dart';
 import 'package:test/test.dart';
 
@@ -12,8 +13,8 @@ void main() {
   });
 
   test('should move fordward', () {
-    int randomX = Random().nextInt(10);
-    int randomY = Random().nextInt(10);
+    int randomX = 5;
+    int randomY = 5;
 
     MarsRover marsRover = MarsRover(x: randomX, y: randomY, direction: 'N');
     marsRover.executeCommands('f');
@@ -30,8 +31,8 @@ void main() {
   });
 
   test('should move backward', () {
-    int randomX = Random().nextInt(10);
-    int randomY = Random().nextInt(10);
+    int randomX = 5;
+    int randomY = 5;
 
     MarsRover marsRover = MarsRover(x: randomX, y: randomY, direction: 'N');
     marsRover.executeCommands('b');
@@ -45,6 +46,27 @@ void main() {
     marsRover = MarsRover(x: randomX, y: randomY, direction: 'W');
     marsRover.executeCommands('b');
     expect(marsRover.x, randomX + 1);
+  });
+  test('should move around sphere', () {
+    int maxX = Mars().maxX;
+    int maxY = Mars().maxY;
+    int minX = Mars().minX;
+    int minY = Mars().minY;
+
+    int random = Random().nextInt(10);
+
+    MarsRover marsRover = MarsRover(x: random, y: minY, direction: 'N');
+    marsRover.executeCommands('b');
+    expect(marsRover.y, maxY);
+    marsRover = MarsRover(x: random, y: maxY, direction: 'S');
+    marsRover.executeCommands('b');
+    expect(marsRover.y, minY);
+    marsRover = MarsRover(x: minX, y: random, direction: 'E');
+    marsRover.executeCommands('b');
+    expect(marsRover.x, maxX);
+    marsRover = MarsRover(x: maxX, y: random, direction: 'W');
+    marsRover.executeCommands('b');
+    expect(marsRover.x, minX);
   });
 
   test('should turn right', () {

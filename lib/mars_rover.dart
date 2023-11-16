@@ -14,39 +14,97 @@ class MarsRover {
   }
 
   void _moveFordward() {
-    if (direction == 'N') y++;
-    if (direction == 'S') y--;
-    if (direction == 'E') x++;
-    if (direction == 'W') x--;
+    if (isLookingNorth) {
+      if (y == 10) {
+        y = 0;
+      } else {
+        y++;
+      }
+    }
+    if (isLookingSouth) {
+      if (y == 0) {
+        y = 10;
+      } else {
+        y--;
+      }
+    }
+
+    if (isLookingEast) {
+      if (x == 10) {
+        x = 0;
+      } else {
+        x++;
+      }
+    }
+
+    if (isLookingWest) {
+      if (x == 0) {
+        x = 10;
+      } else {
+        x--;
+      }
+    }
   }
 
+  bool get isLookingWest => direction == 'W';
+
+  bool get isLookingEast => direction == 'E';
+
+  bool get isLookingSouth => direction == 'S';
+
+  bool get isLookingNorth => direction == 'N';
+
   void _movebackward() {
-    if (direction == 'N') y--;
-    if (direction == 'S') y++;
-    if (direction == 'E') x--;
-    if (direction == 'W') x++;
+    if (isLookingNorth) {
+      if (y == 0) {
+        y = 10;
+      } else {
+        y--;
+      }
+    }
+    if (isLookingSouth) {
+      if (y == 10) {
+        y = 0;
+      } else {
+        y++;
+      }
+    }
+    if (isLookingEast) {
+      if (x == 0) {
+        x = 10;
+      } else {
+        x--;
+      }
+    }
+    if (isLookingWest) {
+      if (x == 10) {
+        x = 0;
+      } else {
+        x++;
+      }
+    }
   }
 
   void _turnRight() {
-    if (direction == 'N') {
+    if (isLookingNorth) {
       direction = 'E';
-    } else if (direction == 'S') {
+    } else if (isLookingSouth) {
       direction = 'W';
-    } else if (direction == 'E') {
+    } else if (isLookingEast) {
       direction = 'S';
-    } else if (direction == 'W') {
+    } else if (isLookingWest) {
       direction = 'N';
     }
   }
 
   void _turnLeft() {
-    if (direction == 'N') {
+    if (isLookingNorth) {
       direction = 'W';
-    } else if (direction == 'S') {
+    } else if (isLookingSouth) {
       direction = 'E';
-    } else if (direction == 'E') {
+    } else if (isLookingEast) {
       direction = 'N';
-    } else if (direction == 'W') {
+    } else if (isLookingWest) {
       direction = 'S';
     }
   }
